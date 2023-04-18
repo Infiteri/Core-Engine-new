@@ -1,8 +1,4 @@
-import { Matrix4x4 } from '../math/Matrix4x4.js'
-import { Vector3 } from '../math/Vector3.js'
-import { Renderer } from '../renderer/Renderer.js'
 import { Buffer } from '../renderer/webgl/Buffer.js'
-import { Texture } from '../renderer/webgl/Texture.js'
 import { Object2D } from './Object2D.js'
 
 /**
@@ -67,9 +63,9 @@ export class Sprite extends Object2D {
     this.buffer.Unbind()
   }
 
-  Render() {
+  Render(model) {
     //Uploading matrices
-    super.Render()
+    super.Render(model)
 
     this.buffer.Bind()
     this.buffer.Draw()

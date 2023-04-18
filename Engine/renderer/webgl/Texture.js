@@ -1,4 +1,5 @@
 import { AssetManager } from '../../assets/AssetManager.js'
+import { Message } from '../../messages/Message.js'
 import { MessageBus } from '../../messages/MessageBus.js'
 import { gl } from '../Renderer.js'
 
@@ -17,7 +18,7 @@ export class Texture {
     const asset = AssetManager.GetAsset(assetName)
     if (!asset) {
       this.LoadTextureWithoutAsset()
-      MessageBus.AddHandler(this)
+      MessageBus.AddSubscription(Message.assetLoaded + this.assetName, this)
     } else {
       this.LoadTextureWithAsset(asset)
     }

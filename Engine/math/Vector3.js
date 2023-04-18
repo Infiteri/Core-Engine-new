@@ -13,6 +13,42 @@ export class Vector3 {
     return new Vector3(1, 1, 1)
   }
 
+  static FromJSON(json) {
+    let x = 0
+    let y = 0
+    let z = 0
+
+    if (json.x) {
+      x = json.x
+    }
+
+    if (json.y) {
+      y = json.y
+    }
+
+    if (json.z) {
+      z = json.z
+    }
+
+    return new Vector3(x, y, z)
+  }
+
+  FromJSON(json) {
+    if (json.x) {
+      this.x = json.x
+    }
+
+    if (json.y) {
+      this.y = json.y
+    }
+
+    if (json.z) {
+      this.z = json.z
+    }
+
+    return this
+  }
+
   ToArray() {
     return [this.x, this.y, this.z]
   }

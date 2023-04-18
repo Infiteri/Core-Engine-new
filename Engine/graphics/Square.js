@@ -1,13 +1,12 @@
 import { Vector3 } from '../math/Vector3.js'
-import { Renderer } from '../renderer/Renderer.js'
 import { Object2D } from './Object2D.js'
 
 /**
  * GRAPHICS ONLY
  */
 export class Square extends Object2D {
-  constructor(width = 100, height = 100) {
-    super()
+  constructor(materialName, width = 100, height = 100) {
+    super(materialName)
 
     this.width = width
     this.height = height
@@ -50,8 +49,8 @@ export class Square extends Object2D {
     this.position = new Vector3(0, 0, 0)
   }
 
-  Render() {
-    super.Render()
+  Render(model) {
+    super.Render(model)
 
     this.buffer.Bind()
     this.buffer.Draw()

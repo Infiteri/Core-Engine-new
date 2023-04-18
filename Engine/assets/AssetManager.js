@@ -51,6 +51,33 @@ class ImageAssetLoader extends AssetLoader {
   }
 }
 
+//JSON assets
+class JSONAsset extends Asset {
+  constructor(name, data) {
+    super(name, data)
+  }
+}
+
+class JSONAssetLoader extends AssetLoader {
+  extensions = ['json']
+
+  LoadAsset(assetName) {
+    const request = new XMLHttpRequest()
+    request.open('GET', assetName)
+    request.addEventListener(
+      'load',
+      this.OnJSONLoaded.bind(this, assetName, request)
+    )
+    request.send()
+  }
+
+  OnJSONLoaded(assetName, request) {
+    const json = JSON.parse(request.responseText)
+    const asset = new JSONAsset(assetName, json)
+    AssetManager.OnAssetLoaded(asset)
+  }
+}
+
 //Manager
 export class AssetManager {
   /** @type {AssetLoader[]} */
@@ -65,6 +92,7 @@ export class AssetManager {
   static Init() {
     //DONE: Add main loaders
     this.RegisterLoader(new ImageAssetLoader())
+    this.RegisterLoader(new JSONAssetLoader())
 
     this._init = true
   }
@@ -95,12 +123,13 @@ export class AssetManager {
     for (const l of this.loaders) {
       const index = l.extensions.indexOf(extension)
 
-      if (index === -1) {
-        console.warn(`No loaders for extension ${extension}`)
-      } else {
+      if (index !== -1) {
         l.LoadAsset(assetName)
+        return
       }
     }
+
+    console.warn(`No loaders for ${extension}`)
   }
 
   static OnAssetLoaded(asset) {
@@ -108,5 +137,9 @@ export class AssetManager {
 
     const code = Message.assetLoaded + asset.name
     MessageBus.Send(code, this, asset, 'NORMAL')
+  }
+
+  static IsAssetLoaded(assetName) {
+    return this.loadedAssets[assetName] !== undefined
   }
 }

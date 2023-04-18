@@ -14,6 +14,12 @@ export class Transform {
     this.scale = core.Vector3.ONE
   }
 
+  static FromJSON(json) {
+    const t = new Transform()
+    t.FromJSON(json)
+    return t
+  }
+
   //   /**
   //    * Copies the transforms from a transform to the current one
   //    *
@@ -24,6 +30,22 @@ export class Transform {
   //     this.rotation.CopyZ(transform.rotation)
   //     this.scale.CopyFrom(transform.scale)
   //   }
+
+  FromJSON(json) {
+    if (json.position) {
+      this.position.FromJSON(json.position)
+    }
+
+    if (json.rotation) {
+      this.rotation.FromJSON(json.rotation)
+    }
+
+    if (json.scale) {
+      this.scale.FromJSON(json.scale)
+    }
+
+    return this
+  }
 
   /**
    * Returns the (translation * rotation) * scale in a Matrix4x4 format

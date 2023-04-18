@@ -1,5 +1,6 @@
 import { MessageBus } from '../messages/MessageBus.js'
 import { Renderer } from '../renderer/Renderer.js'
+import { LevelManager } from '../scene/LevelManager.js'
 import { Engine } from './Engine.js'
 import { Window } from './Window.js'
 
@@ -10,7 +11,7 @@ export class Application {
   constructor() {
     new Window() //Auto window setup / resizing and canvas state
 
-    MessageBus.AddHandler(this)
+    // MessageBus.AddHandler(this)
   }
 
   OnMessage(message) {}
@@ -38,6 +39,7 @@ export class Application {
    */
   Render() {
     Renderer.Render()
+    LevelManager.Render()
 
     this.OnRender(Engine.GetDeltaTime())
   }
@@ -46,6 +48,7 @@ export class Application {
    * Do not re-write
    */
   Update() {
+    LevelManager.Update()
     this.OnUpdate(Engine.GetDeltaTime())
   }
 

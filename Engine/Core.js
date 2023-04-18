@@ -14,6 +14,12 @@ import { Renderer } from './renderer/Renderer.js'
 import { Color } from './renderer/extras/Color.js'
 import { Material } from './renderer/extras/Material.js'
 import { Buffer } from './renderer/webgl/Buffer.js'
+import { GameObject } from './scene/GameObject.js'
+import { Level } from './scene/Level.js'
+import { LevelManager } from './scene/LevelManager.js'
+import { SpriteComponent } from './scene/components/SpriteComponent.js'
+import { SquareComponent } from './scene/components/SquareComponent.js'
+import { ScriptManager } from './script/ScriptManager.js'
 
 /**
  * House for imports
@@ -56,6 +62,18 @@ const Core = {
   Square,
   Sprite,
   //? --------------------
+
+  //? WORLD --------------
+  GameObject,
+  Level,
+  LevelManager,
+  //? --------------------
+
+  ScriptManager,
+
+  //Comps
+  SquareComponent,
+  SpriteComponent,
 }
 
 export default Core
