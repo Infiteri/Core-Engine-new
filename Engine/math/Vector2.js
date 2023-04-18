@@ -1,20 +1,24 @@
-export class Vector3 {
-  constructor(x = 0, y = 0, z = 0) {
+export class Vector2 {
+  constructor(x = 0, y = 0) {
     this.x = x
     this.y = y
-    this.z = z
   }
 
   static get ZERO() {
-    return new Vector3(0, 0, 0)
+    return new Vector2(0, 0)
   }
 
   static get ONE() {
-    return new Vector3(1, 1, 1)
+    return new Vector2(1, 1)
+  }
+
+  CopyFrom(v) {
+    this.x = v.x
+    this.y = v.y
   }
 
   ToArray() {
-    return [this.x, this.y, this.z]
+    return [this.x, this.y]
   }
 
   To32Array() {
@@ -24,7 +28,6 @@ export class Vector3 {
   Add(vector) {
     this.x += vector.x
     this.y += vector.y
-    this.z += vector.z
 
     return this
   }
@@ -32,7 +35,6 @@ export class Vector3 {
   Sub(vector) {
     this.x -= vector.x
     this.y -= vector.y
-    this.z -= vector.z
 
     return this
   }
@@ -40,7 +42,6 @@ export class Vector3 {
   Div(vector) {
     this.x /= vector.x
     this.y /= vector.y
-    this.z /= vector.z
 
     return this
   }
@@ -48,12 +49,11 @@ export class Vector3 {
   Mul(vector) {
     this.x *= vector.x
     this.y *= vector.y
-    this.z *= vector.z
 
     return this
   }
 
   Clone() {
-    return new Vector3(this.x, this.y, this.z)
+    return new Vector2(this.x, this.y)
   }
 }

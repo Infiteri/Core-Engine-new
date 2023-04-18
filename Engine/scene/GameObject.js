@@ -97,7 +97,9 @@ export class GameObject {
     child._parent = this
 
     //If this is already initialized, calls the child.Init method
-    if (this._isLoaded) child.Init()
+    if (this._isLoaded) {
+      child.Init()
+    }
 
     this._children.push(child)
   }
@@ -111,7 +113,9 @@ export class GameObject {
     component.parent = this
 
     //If this is already initialized, calls the child.Init method
-    component.Init()
+    if (this._isLoaded) {
+      component.Init()
+    }
 
     this._components.push(component)
   }

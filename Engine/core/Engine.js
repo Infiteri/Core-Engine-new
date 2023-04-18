@@ -88,13 +88,14 @@ export class Engine {
 
     //Calculate delta time
     this.delta = (performance.now() - this._previousTime) / 1000
-    this._previousTime = performance.now()
 
     //Update subsystems
     MessageBus.Update()
 
     //Run app
     this.application.Run()
+
+    this._previousTime = performance.now()
 
     requestAnimationFrame(this.Update.bind(this))
   }

@@ -1,4 +1,5 @@
 import { MaterialManager } from '../manager/MaterialManager.js'
+import { Vertex } from '../math/Vertex.js'
 import { Renderer } from '../renderer/Renderer.js'
 import { Buffer } from '../renderer/webgl/Buffer.js'
 
@@ -10,6 +11,9 @@ export class Object2D {
     this.buffer = new Buffer({
       elementSize: 0,
     })
+
+    /** @type {Vertex[]} */
+    this.vertices = []
   }
 
   Init() {}

@@ -1,4 +1,6 @@
 import { Vector3 } from '../math/Vector3.js'
+import { Vertex } from '../math/Vertex.js'
+import { Buffer } from '../renderer/webgl/Buffer.js'
 import { Object2D } from './Object2D.js'
 
 /**
@@ -11,42 +13,23 @@ export class Square extends Object2D {
     this.width = width
     this.height = height
 
-    const data = [
-      0,
-      0,
-      0,
-
-      //
-      0,
-      this.height,
-      0,
-
-      //
-      this.width,
-      this.height,
-      0,
-
-      //
-      this.width,
-      this.height,
-      0,
-      //
-      this.width,
-      0,
-      0,
-
-      0,
-      0,
-      0,
+    this.vertices = [
+      new Vertex(0, 0, 0),
+      new Vertex(0, this.height, 0),
+      new Vertex(this.width, this.height, 0),
+      new Vertex(this.width, this.height, 0),
+      new Vertex(this.width, 0, 0),
+      new Vertex(0, 0, 0),
     ]
 
-    this.buffer.elementSize = 3
-    this.buffer.AddData(data)
+    this.buffer = new Buffer({
+      elementSize: 5,
+    })
+    this.buffer.AddData(Vertex.GetArray(this.vertices))
     this.buffer.AddLayout(0, 0, 3)
     this.buffer.Init()
     this.buffer.Unbind()
 
-    this.position = new Vector3(0, 0, 0)
   }
 
   Render(model) {
